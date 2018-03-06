@@ -36,7 +36,6 @@ class Handler extends ExceptionHandler
      */
     public function report(Exception $exception)
     {
-        var_dump($exception);die;
         parent::report($exception);
     }
 
@@ -48,8 +47,7 @@ class Handler extends ExceptionHandler
      * @return \Illuminate\Http\Response
      */
     public function render($request, Exception $exception)
-    {        var_dump($exception);die;
-
+    {
         return parent::render($request, $exception);
     }
 }
