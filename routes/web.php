@@ -11,6 +11,10 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'ParseController@index');
+Route::post('/parse', 'ParseController@parse');
+Route::get('/parse-requests', 'ParseController@list');
+Route::get('/parse-requests/{id}', 'ParseController@view');
+Route::post('/parse-requests/{id}/save', 'ParseController@save');
+Route::post('/parse-requests/{id}/csv', 'ParseController@csv');
+Route::post('/parse-requests/{id}/email', 'ParseController@email');
