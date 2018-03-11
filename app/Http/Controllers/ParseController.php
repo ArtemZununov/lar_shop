@@ -73,6 +73,7 @@ class ParseController extends Controller {
     private function mockFindRequests() {
         // Todo: delete this function and search parse requests in db
         $test = new ParseRequest();
+        $test->id = 1;
         $test->setCreatedAt(new Carbon);
 
         return [
