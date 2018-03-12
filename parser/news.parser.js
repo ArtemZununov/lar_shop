@@ -54,22 +54,36 @@ logger.log('Parser script is initialized');
          }
          function getArticleData(articleBlock) {
              var link = articleBlock.getElementsByTagName('a')[0];
-             /** TODO: add missed params parsing **/
+             var time = articleBlock.getElementsByClassName('article__time')[0];
+             var subtitle = articleBlock.getElementsByClassName('article__subtitle')[0];
+             var bold =  articleBlock.getElementsByClassName('article__bold')[0];
+             
+            
+             if(time !== null){
+             
              return {
                  title: link.innerHTML,
                  url: link.href,
-                 time: '',
-                 isBold: true,
-                 subtitle: '',
+                 time: time.innerHTML,
+                 isBold: articleBlock.classList.contains('article_bold'),
+                 subtitle: subtitle.innerHTML,
                  /** Full property is needed to write details article parsing info later */
                  full: {}
              };
          }
+     }
 
          /**
           * @TODO: slice elements from article if limit is > 0
           **/
          var articles = getNewsContainer().getElementsByClassName('article');
+         
+         
+         articles = Array.prototype.slice.call(articles, 0, limit)
+         
+         
+         
+         
          var result = [];
 
          alert('Articles fetched');
@@ -94,13 +108,18 @@ logger.log('Parser script is initialized');
      return page.evaluate(function () {
          var title = document.getElementsByClassName('post_news__title')[0];
          var content = document.getElementsByClassName('post_news__text')[0];
+         var time = document.getElementsByClassName('post_news__date')[0];
+         var tags = document.getElementsByTagName('span')[0];
+
+       
+         
          /** TODO: add missed params parsing **/
          return {
              title: title.innerHTML,
              content: content.innerHTML,
-             tags: [],
-             time: 0,
-             commentsCounter: 0,
+             tags: tags.innerHTML,
+             time: time.innerHTML,
+            
          };
      });
  }
@@ -112,16 +131,38 @@ logger.log('Parser script is initialized');
     return page.evaluate(function () {
         var title = document.getElementsByClassName('post__title')[0];
         var content = document.getElementsByClassName('post__text')[0];
+         var time = document.getElementsByClassName('post_time')[0];
+         var tags = document.getElementsByTagName('span')[0];
         /** TODO: add missed params parsing **/
         return {
             title: title.textContent,
             content: content.innerHTML,
-            tags: [],
-            time: 0,
-            commentsCounter: 0
+            tags: tags.innerHTML,
+            time: time.innerHTML,
+           
         };
     });
  }
+ 
+ 
+ 
+ 
+  function evroPravdaArticleParser(page){
+      
+        return page.evaluate(function () {
+        var title = document.getElementsByClassName('title')[0];
+        var content = document.getElementsByClassName('text')[0];
+        var time = document.getElementsByClassName('d_t2')[0];
+       
+        /** TODO: add missed params parsing **/
+        return {
+            title: title.textContent,
+            content: content.innerHTML,
+            time: time.innerHTML,
+           
+        };
+    });
+  }
 
 /**
  * Defines which article parser function need to be used for specified
