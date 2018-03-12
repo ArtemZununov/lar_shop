@@ -41,7 +41,7 @@ logger.log('Parser script is initialized');
          limit: limit,
          response: response,
          time: Date.now() - initTime
-     }, null, 2);
+     }, null, isVerbose ? 2 : undefined);
  }
 
 /**
@@ -70,6 +70,7 @@ logger.log('Parser script is initialized');
           * @TODO: slice elements from article if limit is > 0
           **/
          var articles = getNewsContainer().getElementsByClassName('article');
+         articles = Array.prototype.slice.call(articles, 0, limit);
          var result = [];
 
          alert('Articles fetched');
