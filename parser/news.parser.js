@@ -41,7 +41,7 @@ logger.log('Parser script is initialized');
          limit: limit,
          response: response,
          time: Date.now() - initTime
-     }, null, 2);
+     }, null, isVerbose ? 2 : undefined);
  }
 
 /**
