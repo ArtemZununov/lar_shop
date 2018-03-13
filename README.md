@@ -16,7 +16,9 @@
 
 **On Windows:**
 
-`./parser/bin/phantomjs.exe news.parser.js  https://www.pravda.com.ua/rus/news/ 0 true`
+in parser directory
+
+`./bin/phantomjs.exe news.parser.js  https://www.pravda.com.ua/rus/news/ 0 true`
 
 **On Mac:** 
 
