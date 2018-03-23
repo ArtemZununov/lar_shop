@@ -47,7 +47,7 @@ class ParseController extends Controller {
         $parser = new ParserService($parseParams['limit']);
         try {
             $result = $parser->parse();
-            $parseRequestId = $this->mockSaveAndReturnSavedId($result);
+            $parseRequestId = $this->saveAndReturnSavedId($result);
             return redirect("/parse-requests/{$parseRequestId}");
         } catch (\Exception $e) {
             // Todo: add error handling
@@ -56,7 +56,7 @@ class ParseController extends Controller {
         }
     }
 
-    public function list()
+    public function list_()
     {
         return view('list', [
             'requests' => $this->mockFindRequests(),
@@ -103,10 +103,17 @@ class ParseController extends Controller {
         return $test;
     }
 
-    private function mockSaveAndReturnSavedId($parseResult): int {
-        // Todo: delete this function and save parse result to db
+    private function saveAndReturnSavedId($parseResult): int {
+       
+        $parse = new Parce;
+        
+        $parse ->id = $parseResult -> id;
+        
+        $parse ->save();
+
+       // Todo: delete this function and save parse result to db
         // var_dump($parseResult); die; Uncomment to explore $parseResult structure
-        return 1;
+        return $parseResult;
     }
 
     private function mockAddIsSaved($id) {

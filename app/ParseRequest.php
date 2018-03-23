@@ -11,4 +11,7 @@ class ParseRequest extends Model
     {
         return $this->hasMany('App\Article');
     }
+    
+    
+    
 }
